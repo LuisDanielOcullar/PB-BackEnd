@@ -39,18 +39,23 @@ rutas_camara.post("/data_correo", (req: Request, res: Response) => {
   /*   console.log("parseBody.html", parsedBody.html);
   console.log("parseBody", parsedBody); 
  */
-     let alarma = parsedBody.plain; 
+  let alarma = parsedBody.plain;
 
- /*  let alarma = "MDR210FGSA-10004(IO_1 Alarm Start) 2019-04-13 03:48:52"; */
+  /*  let alarma = "MDR210FGSA-10004(IO_1 Alarm Start) 2019-04-13 03:48:52"; */
   let separar_data_alarma = alarma.search("IO_1 Alarm Start");
   let vehiculo_dispositivo = alarma.substring(0, separar_data_alarma - 1);
+  let alarma_temp = alarma.substring(
+    separar_data_alarma + vehiculo_dispositivo.length + 2,
+    alarma.length
+  );
 
   //encuentra la hora y dia
-  let dia = alarma.substring(
-    alarma.lastIndexOf(" ") - 10,
-    alarma.lastIndexOf(" ")
+
+  let dia = alarma_temp.substring(0, alarma_temp.indexOf(" "));
+  let hora = alarma_temp.substring(
+    alarma_temp.indexOf(" ") + 1,
+    alarma_temp.length
   );
-  let hora = alarma.substring(alarma.lastIndexOf(" ") + 1, alarma.length);
 
   let respuesta_veh_dispositivo = vehiculo_dispositivo.split("-");
 
@@ -64,7 +69,8 @@ rutas_camara.post("/data_correo", (req: Request, res: Response) => {
   };
   if (instanciaCamaras.alarmaDuplicada(respuesta)) {
     return res.send({
-      mensaje: "la alarma que quieres emitir ya esta duplicada rey"
+      mensaje: "la alarma que quieres emitir ya esta duplicada rey",
+      respuesta
     });
   } else {
     instanciaCamaras.agregarAlarma(respuesta);
