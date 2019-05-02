@@ -21,7 +21,7 @@ export default class Camaras {
         bandera = true;
       }
     });
-    return false;
+    return bandera;//aqui se le cambia
   }
 
   agregarAlarma(camara_alarma: any) {

@@ -17,7 +17,7 @@ class Camaras {
                 bandera = true;
             }
         });
-        return false;
+        return bandera; //aqui se le cambia
     }
     agregarAlarma(camara_alarma) {
         this.dispositivos_alarmas.push(camara_alarma);
