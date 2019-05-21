@@ -14,7 +14,7 @@ rutas_prueba.get("/prueba", (req, res) => {
 });
 rutas_prueba.get("/sacar_session", (req, res) => {
     let usuario = enviroment_1.USER_CAMERA;
-    let password = enviroment_1.PASS_CAMERA;
+    let password = process.env.PASS_CAMERA;
     axios_1.default
         .get("http://18.217.222.220:8080/StandardApiAction_login.action?account=admin&password=0cu11qr9")
         .then((respuesta) => {

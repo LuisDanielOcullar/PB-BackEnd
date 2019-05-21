@@ -1,8 +1,8 @@
 import { Router, Request, Response } from "express";
 import axios from "axios";
-import { USER_CAMERA, PASS_CAMERA } from "../../../global/enviroment";
 import Server from "../../controllers/server";
 import Camaras from "../../controllers/camaras";
+
 const rutas_camara = Router();
 
 const instanciaServidor = Server.instance;
@@ -15,8 +15,9 @@ rutas_camara.get("/prueba", (req: Request, res: Response) => {
 });
 
 rutas_camara.get("/sacar_session", (req: Request, res: Response) => {
-  let usuario = USER_CAMERA;
-  let password = PASS_CAMERA;
+  let usuario = process.env.USER_CAMERA;
+  console.log(process.env.USER_CAMERA);
+  let password = process.env.PASS_CAMERA;
 
   axios
     .get(
@@ -87,6 +88,10 @@ rutas_camara.post("/data_correo", (req: Request, res: Response) => {
 
 rutas_camara.get("/alarmasActivas", (req: Request, res: Response) => {
   return res.send({ alarmas: instanciaCamaras.getAlarmas() });
+});
+
+rutas_camara.get("/pruebadedahua", (req: Request, res: Response) => {
+  return res.send({ mensaje: "estamos en la prueba dahua" });
 });
 
 export default rutas_camara;

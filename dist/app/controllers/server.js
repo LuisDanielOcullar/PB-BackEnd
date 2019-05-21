@@ -11,7 +11,6 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
-const enviroment_1 = require("../../global/enviroment");
 const http_1 = __importDefault(require("http"));
 const socket_io_1 = __importDefault(require("socket.io"));
 const socket = __importStar(require("../sockets/sockets"));
@@ -19,7 +18,7 @@ const socket = __importStar(require("../sockets/sockets"));
 class Server {
     constructor() {
         this.app = express_1.default();
-        this.port = enviroment_1.SERVER_PORT;
+        this.port = Number(process.env.PORT) || 5000;
         this.httpServer = new http_1.default.Server(this.app);
         this.io = socket_io_1.default(this.httpServer); //tenemos que poner este mismo configurado
         this.escucharSockets();

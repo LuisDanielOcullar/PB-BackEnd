@@ -5,7 +5,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const axios_1 = __importDefault(require("axios"));
-const enviroment_1 = require("../../../global/enviroment");
 const server_1 = __importDefault(require("../../controllers/server"));
 const camaras_1 = __importDefault(require("../../controllers/camaras"));
 const rutas_camara = express_1.Router();
@@ -17,8 +16,9 @@ rutas_camara.get("/prueba", (req, res) => {
         .send({ mensaje: "Este es el endpoint de las respectivas camaras" });
 });
 rutas_camara.get("/sacar_session", (req, res) => {
-    let usuario = enviroment_1.USER_CAMERA;
-    let password = enviroment_1.PASS_CAMERA;
+    let usuario = process.env.USER_CAMERA;
+    console.log(process.env.USER_CAMERA);
+    let password = process.env.PASS_CAMERA;
     axios_1.default
         .get(`http://18.217.222.220:8080/StandardApiAction_login.action?account=${usuario}&password=${password}`)
         .then((respuesta) => {
@@ -71,5 +71,8 @@ rutas_camara.post("/data_correo", (req, res) => {
 });
 rutas_camara.get("/alarmasActivas", (req, res) => {
     return res.send({ alarmas: instanciaCamaras.getAlarmas() });
+});
+rutas_camara.get("/pruebadedahua", (req, res) => {
+    return res.send({ mensaje: "estamos en la prueba dahua" });
 });
 exports.default = rutas_camara;

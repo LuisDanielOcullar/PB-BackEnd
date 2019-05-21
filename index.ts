@@ -1,11 +1,15 @@
 import Server from "./app/controllers/server";
-import { SERVER_PORT } from "./global/enviroment";
+
 import { App } from "./app/app";
+import * as dotenv from "dotenv";
 
 const server = Server.instance;
 
+dotenv.config();
+
 const app = new App();
 
+dotenv.config();
 server.start(() => {
-  console.log(`Servidor levantado en  puerto ${SERVER_PORT}`);
+  console.log(`Servidor levantado en  puerto ${process.env.SERVER_PORT}`);
 });

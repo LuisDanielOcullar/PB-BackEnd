@@ -1,5 +1,4 @@
 import express from "express";
-import { SERVER_PORT } from "../../global/enviroment";
 
 import http from "http";
 import SocketIO from "socket.io";
@@ -17,7 +16,7 @@ export default class Server {
 
   private constructor() {
     this.app = express();
-    this.port = SERVER_PORT;
+    this.port = Number(process.env.PORT) || 5000;
 
     this.httpServer = new http.Server(this.app);
 
@@ -41,7 +40,6 @@ export default class Server {
       socket.alarmaAtendida(cliente, this.io);
 
       socket.limpiarAlarmas(cliente, this.io);
-      
     });
   }
   start(callback: any) {
