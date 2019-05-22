@@ -29,7 +29,6 @@ rutas_camara.get("/sacar_session", (req, res) => {
     });
 });
 rutas_camara.post("/data_correo", (req, res) => {
-    console.log("estoy entrando");
     let parsedBody = req.body;
     /* console.log("parsedBody.plain", parsedBody.plain); */
     /*  console.log("parsedBody.from", parsedBody.from);
@@ -37,9 +36,9 @@ rutas_camara.post("/data_correo", (req, res) => {
     /*   console.log("parseBody.html", parsedBody.html);
     console.log("parseBody", parsedBody);
    */
-    let alarma = parsedBody.plain;
-    /*   /*   let alarma = "MDR210FGSA-10004(IO_1 Alarm Start) 2019-04-13 03:48:52";  */
-    /*   let alarma = "10002-10002(Emergency Button Alarm Start) 2019-05-22 11:07:50";  */
+    /* let alarma = parsedBody.plain; */
+    /* let alarma = "MDR210FGSA-10004(IO_1 Alarm Start) 2019-04-13 03:48:52"; */
+    let alarma = "10002-10002(Emergency Button Alarm Start) 2019-05-22 11:07:50";
     let separar_data_alarma = alarma.search("IO_1 Alarm Start");
     if (separar_data_alarma < 1) {
         separar_data_alarma = alarma.search("Emergency Button Alarm Start");
@@ -47,9 +46,18 @@ rutas_camara.post("/data_correo", (req, res) => {
     let vehiculo_dispositivo = alarma.substring(0, separar_data_alarma - 1);
     let alarma_temp = alarma.substring(vehiculo_dispositivo.length, alarma.length);
     //encuentra la hora y dia
-    let dia_hora_indice = alarma_temp.length - 22;
+    let indice_largo = alarma_temp.length - 1;
+    while (indice_largo > 0) {
+        if (alarma_temp[indice_largo] === " ") {
+            indice_largo = indice_largo - 1;
+        }
+        else {
+            break;
+        }
+    }
+    let dia_hora_indice = indice_largo - 18;
     let dia = alarma_temp.substring(dia_hora_indice, dia_hora_indice + 10);
-    let hora = alarma_temp.substring(alarma_temp.length - 11, alarma_temp.length - 2);
+    let hora = alarma_temp.substring(indice_largo - 7, indice_largo + 1);
     /*   hora = alarma_temp.substring(
       alarma_temp.indexOf(" ") + 1,
       alarma_temp.length
@@ -63,6 +71,7 @@ rutas_camara.post("/data_correo", (req, res) => {
         dia,
         hora
     };
+    return res.send(respuesta);
     if (instanciaCamaras.alarmaDuplicada(respuesta)) {
         return res.send({
             mensaje: "la alarma que quieres emitir ya esta duplicada rey",
