@@ -24,7 +24,7 @@ class App {
     }
     configuRarRutas() {
         this.server.app.use("/api/v1", rutas.rutas_camaras); //aqui esta las de richmond y el de jsession
-        this.server.app.use("/api/v1/algo", rutas.rutas_algo);
+        this.server.app.use("", rutas.rutas_algo);
     }
 }
 exports.App = App;
