@@ -48,8 +48,8 @@ rutas_camara.post("/data_correo", (req, res) => {
     let alarma_temp = alarma.substring(vehiculo_dispositivo.length, alarma.length);
     //encuentra la hora y dia
     let dia_hora_indice = alarma_temp.length - 22;
-    let dia = alarma_temp.substring(dia_hora_indice, dia_hora_indice + 11);
-    let hora = alarma_temp.substring(alarma_temp.length - 11, alarma_temp.length);
+    let dia = alarma_temp.substring(dia_hora_indice, dia_hora_indice + 10);
+    let hora = alarma_temp.substring(alarma_temp.length - 11, alarma_temp.length - 2);
     /*   hora = alarma_temp.substring(
       alarma_temp.indexOf(" ") + 1,
       alarma_temp.length
