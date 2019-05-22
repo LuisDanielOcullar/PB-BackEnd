@@ -32,6 +32,7 @@ rutas_camara.get("/sacar_session", (req: Request, res: Response) => {
 });
 
 rutas_camara.post("/data_correo", (req: Request, res: Response) => {
+  console.log("estoy entrando");
   let parsedBody = req.body;
 
   /* console.log("parsedBody.plain", parsedBody.plain); */
@@ -42,8 +43,8 @@ rutas_camara.post("/data_correo", (req: Request, res: Response) => {
  */
   let alarma = parsedBody.plain;
 
-  /*   let alarma = "MDR210FGSA-10004(IO_1 Alarm Start) 2019-04-13 03:48:52"; 
-  let alarma = "10002-10002(Emergency Button Alarm Start) 2019-05-22 11:07:50"; */
+  /*   /*   let alarma = "MDR210FGSA-10004(IO_1 Alarm Start) 2019-04-13 03:48:52";  */
+  /*   let alarma = "10002-10002(Emergency Button Alarm Start) 2019-05-22 11:07:50";  */
   let separar_data_alarma = alarma.search("IO_1 Alarm Start");
   if (separar_data_alarma < 1) {
     separar_data_alarma = alarma.search("Emergency Button Alarm Start");
@@ -56,9 +57,10 @@ rutas_camara.post("/data_correo", (req: Request, res: Response) => {
 
   //encuentra la hora y dia
 
-  let dia_hora_indice = alarma_temp.length - 19;
-  let dia = alarma_temp.substring(dia_hora_indice, dia_hora_indice + 10);
-  let hora = alarma_temp.substring(alarma_temp.length - 8, alarma_temp.length);
+  let dia_hora_indice = alarma_temp.length - 22;
+  let dia = alarma_temp.substring(dia_hora_indice, dia_hora_indice + 11);
+
+  let hora = alarma_temp.substring(alarma_temp.length - 11, alarma_temp.length);
 
   /*   hora = alarma_temp.substring(
     alarma_temp.indexOf(" ") + 1,
