@@ -71,7 +71,6 @@ rutas_camara.post("/data_correo", (req, res) => {
         dia,
         hora
     };
-    return res.send(respuesta);
     if (instanciaCamaras.alarmaDuplicada(respuesta)) {
         return res.send({
             mensaje: "la alarma que quieres emitir ya esta duplicada rey",
