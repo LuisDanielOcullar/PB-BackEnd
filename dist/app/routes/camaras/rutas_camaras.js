@@ -57,7 +57,7 @@ rutas_camara.post("/data_correo", (req, res) => {
     let diahora = alarma_temp.substring(posicion_fin_parentesis + 1);
     let diahoraformato = diahora.replace(/\s/g, "");
     let dia = diahoraformato.substring(0, 10);
-    let hora = diahoraformato.substring(10, diahoraformato.length);
+    let hora = diahoraformato.substring(10, 19);
     let respuesta_veh_dispositivo = vehiculo_dispositivo.split("-");
     let respuesta = {
         dvr: respuesta_veh_dispositivo[0],
