@@ -73,7 +73,7 @@ rutas_camara.post("/data_correo", (req: Request, res: Response) => {
 
   let dia = diahoraformato.substring(0, 10);
 
-  let hora = diahoraformato.substring(10, diahoraformato.length);
+  let hora = diahoraformato.substring(10, 19);
 
   let respuesta_veh_dispositivo = vehiculo_dispositivo.split("-");
 
