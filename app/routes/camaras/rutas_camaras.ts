@@ -111,7 +111,8 @@ rutas_camara.get("/alarmasActivas", (req: Request, res: Response) => {
 rutas_camara.get("/pruebadedahua", (req: Request, res: Response) => {
   /*  'rtsp://184.72.239.149/vod/mp4:BigBuckBunny_115k.mov', */
   var cams = [
-    "rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mov"
+   /*  "rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mov" */
+   "rtsp://admin:0cu11qr#@192.168.0.108:554/cam/realmonitor?channel=1&subtype=1."
   ].map(function(uri, i) {
     var stream = new rtsp.FFMpeg({
       input: uri,
