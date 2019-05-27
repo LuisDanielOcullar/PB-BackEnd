@@ -8,6 +8,7 @@ const axios_1 = __importDefault(require("axios"));
 const server_1 = __importDefault(require("../../controllers/server"));
 const camaras_1 = __importDefault(require("../../controllers/camaras"));
 const rutas_camara = express_1.Router();
+var rtsp = require("rtsp-ffmpeg");
 const instanciaServidor = server_1.default.instance;
 const instanciaCamaras = camaras_1.default.instanciaCamaras;
 rutas_camara.get("/prueba", (req, res) => {
@@ -57,7 +58,7 @@ rutas_camara.post("/data_correo", (req, res) => {
     let diahora = alarma_temp.substring(posicion_fin_parentesis + 1);
     let diahoraformato = diahora.replace(/\s/g, "");
     let dia = diahoraformato.substring(0, 10);
-    let hora = diahoraformato.substring(10, 19);
+    let hora = diahoraformato.substring(10, 18);
     let respuesta_veh_dispositivo = vehiculo_dispositivo.split("-");
     let respuesta = {
         dvr: respuesta_veh_dispositivo[0],
@@ -87,6 +88,32 @@ rutas_camara.get("/alarmasActivas", (req, res) => {
     return res.send({ alarmas: instanciaCamaras.getAlarmas() });
 });
 rutas_camara.get("/pruebadedahua", (req, res) => {
-    return res.send({ mensaje: "estamos en la prueba dahua" });
+    /*  'rtsp://184.72.239.149/vod/mp4:BigBuckBunny_115k.mov', */
+    var cams = [
+        "rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mov"
+    ].map(function (uri, i) {
+        var stream = new rtsp.FFMpeg({
+            input: uri,
+            resolution: "320x240",
+            quality: 3
+        });
+        stream.on("start", function () {
+            console.log("stream " + i + " started");
+        });
+        stream.on("stop", function () {
+            console.log("stream " + i + " stopped");
+        });
+        return stream;
+    });
+    console.log(cams);
+    var pipeStream = function (data) {
+        instanciaServidor.io.emit("datajuanin", data);
+    };
+    cams[0].on("data", pipeStream);
+    setTimeout(() => {
+        cams[0].removeListener("data", pipeStream);
+        console.log("video se armo como dios");
+    }, 20000);
+    return res.send({ mensaje: "fin" });
 });
 exports.default = rutas_camara;

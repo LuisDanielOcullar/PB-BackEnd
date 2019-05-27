@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node dist/",
+    "start": "nodemon dist/",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "engines": {
@@ -15,20 +15,24 @@
   "dependencies": {
     "@types/circular-json": "^0.4.0",
     "@types/formidable": "^1.0.31",
+    "@types/node": "^12.0.2",
     "axios": "^0.18.0",
-    "body-parser": "^1.18.3",
+    "body-parser": "^1.19.0",
     "circular-json": "^0.5.9",
     "cors": "^2.8.5",
     "dotenv": "^8.0.0",
-    "express": "^4.16.4",
+    "express": "^4.17.0",
     "formidable": "^1.2.1",
     "http": "0.0.0",
-    "nodemon": "^1.18.10",
+    "mylib": "^0.1.4",
+    "node-import": "^0.9.2",
+    "node-rtsp-stream": "0.0.8",
+    "nodemon": "^1.19.0",
     "rtsp-ffmpeg": "0.0.14",
     "socket.io": "^2.2.0"
   },
   "devDependencies": {
-    "@types/cors": "^2.8.4",
+    "@types/cors": "^2.8.5",
     "@types/dotenv": "^6.1.1",
     "@types/express": "^4.16.1",
     "@types/socket.io": "^2.1.2"

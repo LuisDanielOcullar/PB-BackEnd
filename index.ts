@@ -11,5 +11,5 @@ const app = new App();
 
 dotenv.config();
 server.start(() => {
-  console.log(`Servidor levantado en  puerto ${process.env.SERVER_PORT}`);
+  console.log(`Servidor levantado en  puerto ${server.port}`);
 });
