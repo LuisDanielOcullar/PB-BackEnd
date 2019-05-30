@@ -40,9 +40,9 @@ rutas_camara.post("/data_correo", (req: Request, res: Response) => {
   /*   console.log("parseBody.html", parsedBody.html);
   console.log("parseBody", parsedBody); 
  */
-  let alarma = parsedBody.plain;
+    let alarma = parsedBody.plain; 
 
-  /* let alarma = "MDR210FGSA-10004(IO_1 Alarm Start) 2019-04-13 03:48:52"; */
+   /*  let alarma = "MDR210FGSA-10004(IO_1 Alarm Start) 2019-04-13 03:48:52"; */
 
   /* let alarma =
     "   10002-10002(Emergency Button Alarm Start)  2019-05-22 11:07:50   "; */
@@ -106,40 +106,6 @@ rutas_camara.post("/data_correo", (req: Request, res: Response) => {
 
 rutas_camara.get("/alarmasActivas", (req: Request, res: Response) => {
   return res.send({ alarmas: instanciaCamaras.getAlarmas() });
-});
-
-rutas_camara.get("/pruebadedahua", (req: Request, res: Response) => {
-  /*  'rtsp://184.72.239.149/vod/mp4:BigBuckBunny_115k.mov', */
-  var cams = [
-    "rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mov"
-/*    "rtsp://admin:0cu11qr#@192.168.0.108:554/cam/realmonitor?channel=1&subtype=1." */
-  ].map(function(uri, i) {
-    var stream = new rtsp.FFMpeg({
-      input: uri,
-      resolution: "320x240",
-      quality: 3
-    });
-    stream.on("start", function() {
-      console.log("stream " + i + " started");
-    });
-    stream.on("stop", function() {
-      console.log("stream " + i + " stopped");
-    });
-    return stream;
-  });
-  console.log(cams);
-
-  var pipeStream = function(data: any) {
-    instanciaServidor.io.emit("datajuanin", data);
-  };
-  cams[0].on("data", pipeStream);
-  setTimeout(() => {
-    cams[0].removeListener("data", pipeStream);
-    console.log("video se armo como dios");
-  }, 20000);
-
-  
-  return res.send({ mensaje: "fin" });
 });
 
 export default rutas_camara;

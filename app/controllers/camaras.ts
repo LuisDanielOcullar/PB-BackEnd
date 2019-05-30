@@ -15,7 +15,7 @@ export default class Camaras {
     return this.dispositivos_alarmas;
   }
   alarmaDuplicada(alarma: any): Boolean {
-    let bandera = false;
+    let bandera = false; 
     this.dispositivos_alarmas.forEach(alarmas_actual => {
       if (alarmas_actual.num_dis === alarma.num_dis) {
         bandera = true;

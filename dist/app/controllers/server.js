@@ -31,11 +31,15 @@ class Server {
         //el on es para escuchar eventos
         this.io.on("connection", cliente => {
             socket.conectarCliente(cliente, this.io);
-            //este es para quitar ese dispositivo del array
-            socket.cerrarAlarma(cliente, this.io);
             //desconectar
             socket.alarmaAtendida(cliente, this.io);
             socket.limpiarAlarmas(cliente, this.io);
+            //este es para quitar ese dispositivo del array
+            socket.cerrarAlarma(cliente, this.io);
+            /* sockets dahua */
+            socket.alarmaAtendidaDahua(cliente, this.io);
+            socket.limpiarAlarmasDahua(cliente, this.io);
+            socket.cerrarAlarmadDahua(cliente, this.io);
         });
     }
     start(callback) {
