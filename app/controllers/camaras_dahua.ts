@@ -103,7 +103,7 @@ export default class CamarasDahua {
     this.stream_alarmas.forEach(alarma_stream => {
       if (num_dis === alarma_stream.num_dis) {
         console.log("te rifaste rey");
-        alarma_stream.stream.removeListener("data", alarma_stream.pipeStream);
+        alarma_stream.stream.removeListener("data", alarma_stream.pipeStream);  
       }
     });
     this.stream_alarmas = this.stream_alarmas.filter(alarmaStream => {

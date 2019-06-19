@@ -40,9 +40,9 @@ rutas_camara.post("/data_correo", (req: Request, res: Response) => {
   /*   console.log("parseBody.html", parsedBody.html);
   console.log("parseBody", parsedBody); 
  */
-    let alarma = parsedBody.plain; 
+   let alarma = parsedBody.plain;   
 
-   /*  let alarma = "MDR210FGSA-10004(IO_1 Alarm Start) 2019-04-13 03:48:52"; */
+ /*  let alarma = "MDR210FGSA-10004(IO_1 Alarm Start) 2019-04-13 03:48:52"; */
 
   /* let alarma =
     "   10002-10002(Emergency Button Alarm Start)  2019-05-22 11:07:50   "; */
