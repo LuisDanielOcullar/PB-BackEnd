@@ -1,19 +1,27 @@
+
+
 import { Socket } from "socket.io";
 import socketIO from "socket.io";
-import Camaras from "../controllers/camaras";
-import CamarasDahua from "../controllers/camaras_dahua";
+import Camaras from "../controllers/camaras"; // camaras richmont
+import CamarasDahua from "../controllers/camaras_dahua";//camaras dahua
+
+//datos de acceso para dahua
 import { USER_DAHUA, PASSWORD_DAHUA } from "../../global/enviroment";
 
+//se inicia la variable
 const instanciaCamaras = Camaras.instanciaCamaras;
+//se inicia la variable
 const instanciaCamarasDahua = CamarasDahua.instanciaCamarasDahua;
+
 
 //aqui estamos configurando el cliente por default
 export const conectarCliente = (cliente: Socket, io: socketIO.Server) => {
   console.log("----------------------");
 };
 
+//cerrar alarma richmont
 export const cerrarAlarma = (cliente: Socket, io: socketIO.Server) => {
-  let num_dis = "";
+  let num_dis = ""; // declara una variable con string vacio
   cliente.on("cerraralarma-definitiva", (payload: any) => {
     console.log("cerrando");
 
@@ -28,6 +36,7 @@ export const cerrarAlarma = (cliente: Socket, io: socketIO.Server) => {
 //este metodo nos permite notificar a los otros cuando una alarma se esta atendiendo
 export const alarmaAtendida = (cliente: Socket, io: SocketIO.Server) => {
   cliente.on("alarma_atendida", (payload: any) => {
+    //marca a la camara como no diponible ni activa para usarse
     let camara_ocupada = instanciaCamaras.modificarAlarma(payload);
 
     cliente.broadcast.emit("alarma_atendida", camara_ocupada);
